@@ -28,6 +28,7 @@ public class ParseJSON {
      	 
      	for (int i = n; i<lista.length; i+=9){
      			lista[i].split(reg);
+     			lista[i].replace("\"","");
      			retorno.add(lista[i]);
      			System.out.println(lista[i]);
      		}
