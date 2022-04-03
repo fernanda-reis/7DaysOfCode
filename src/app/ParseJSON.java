@@ -15,7 +15,7 @@ public class ParseJSON {
 
      	
          //separar as virgulas
-     	String reg  = "\",\"|\\},\\{";           	
+     	String reg  = "\",\"|\\},\\{";          	
      	String [] listaFilmes = jsonFilmes.split(reg);
      	return listaFilmes;
      }
@@ -23,12 +23,14 @@ public class ParseJSON {
 	 
 		public  static List<String> parseItem(String[] lista, int n) {
          ArrayList<String> retorno = new ArrayList<>();
+         // " " e {
          String reg = "^\"|\\{"; 
-
+         // ":"
+         String reg2 = "\"\\:\"";
      	 
      	for (int i = n; i<lista.length; i+=9){
      			lista[i].split(reg);
-     			lista[i].replace("\"","");
+     			lista[i] = lista[i].replaceAll(reg2,":");
      			retorno.add(lista[i]);
      			System.out.println(lista[i]);
      		}
