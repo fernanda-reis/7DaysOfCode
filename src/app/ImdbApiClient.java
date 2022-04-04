@@ -6,14 +6,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class API {
+public class ImdbApiClient {
+	static String apiKey = "<sua chave>";
+	
+	public ImdbApiClient(String key) {
+		ImdbApiClient.apiKey = key;
+	};
 
-
-	public static String api() throws IOException, InterruptedException {
+	public String getBody() throws IOException, InterruptedException {
 	String url = "https://imdb-api.com/en/API/Top250Movies/";
 
     HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url + Key.key))
+            .uri(URI.create(url + apiKey))
             .GET()
             .build();
     
