@@ -1,4 +1,4 @@
-package app;
+package apiClient;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,7 +6,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ImdbApiClient {
+import interfaces.APIClient;
+
+public class ImdbApiClient implements APIClient {
+	
+	String type = "Movie";
 	static String apiKey = "<sua chave>";
 	
 	public ImdbApiClient(String key) {
@@ -24,5 +28,12 @@ public class ImdbApiClient {
     HttpResponse<String> response =	HttpClient.newHttpClient()
     		.send(request, HttpResponse.BodyHandlers.ofString());
 	return response.body();
+	}
+
+
+	@Override
+	public String type() {
+		// TODO Auto-generated method stub
+		return type;
 	}
 }

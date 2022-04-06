@@ -3,6 +3,8 @@ package app;
 import java.io.PrintWriter;
 import java.util.List;
 
+import interfaces.Content;
+
 public class HTMLGenerator {
 	
 	private static PrintWriter writer;
@@ -11,10 +13,10 @@ public class HTMLGenerator {
 		HTMLGenerator.writer = w;
 	}
 
-	public void generate(List<Movie> movies) {
+	public void generate(List<? extends Content> list) {
 		String head = 
 				"""
-				<html>
+				<html lang=\"pt-br\">
 					<head>
 						<meta charset=\"utf-8\">
 						<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
@@ -42,9 +44,9 @@ public class HTMLGenerator {
 		
 
 		// usando o template com os dados do filme
-		for(int i = 0; i < movies.size(); i++) {
-		writer.println(String.format(divTemplate, movies.get(i).getTitle(), movies.get(i).getUrlImage(), movies.get(i).getTitle(), movies.get(i).getRating(),
-				movies.get(i).getYear()));
+		for(int i = 0; i < list.size(); i++) {
+		writer.println(String.format(divTemplate, list.get(i).title(), list.get(i).urlImage(), list.get(i).title(), list.get(i).rating(),
+				list.get(i).year()));
 		}
 		
 		

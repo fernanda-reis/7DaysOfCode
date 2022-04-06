@@ -3,7 +3,10 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImdbMovieJsonParser {
+import interfaces.JsonParser;
+import model.Movie;
+
+public class ImdbMovieJsonParser implements JsonParser{
 
 	private static String json;
 	
@@ -20,15 +23,10 @@ public class ImdbMovieJsonParser {
 
 		// separar as virgulas
 		String reg = "\",\"|\\},\\{";
-		String[] listaFilmes = jsonFilmes.split(reg);
+		String[] moviesArray = jsonFilmes.split(reg);
 		
-		return listMovies(listaFilmes);
-	}
 
-
-	
-	private List<Movie> listMovies(String[] moviesArray) {
-
+		// parse atributos
 		List<String> titles = ImdbMovieJsonParser.parseItem(moviesArray, 2);
 
 		List<String> images = ImdbMovieJsonParser.parseItem(moviesArray, 5);
@@ -44,8 +42,8 @@ public class ImdbMovieJsonParser {
 
 			movie.setTitle(titles.get(i));
 			movie.setUrlImage(images.get(i));
-			movie.setRating(Float.parseFloat(ratings.get(i)));
-			movie.setYear(Integer.parseInt(years.get(1)));
+			movie.setRating(ratings.get(i));
+			movie.setYear(years.get(1));
 
 			movies.add(movie);
 		}
