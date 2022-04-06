@@ -2,6 +2,8 @@ package app;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import apiClient.ImdbApiClient;
@@ -15,9 +17,11 @@ public class Main {
 		String apiKey = Key.keyImdb;
 		
 		String json = new ImdbApiClient(apiKey).getBody();
-		String ajson = new MarvelApiClient(Key.keyMarvelPublic, Key.keyMarvelPrivate).getBody();
+		//String ajson = new MarvelApiClient(Key.keyMarvelPublic, Key.keyMarvelPrivate).getBody();
 		
 		List<Movie> movies = new ImdbMovieJsonParser(json).parse();
+		Collections.sort(movies, Comparator.reverseOrder());
+		
 		
 		PrintWriter writer = new PrintWriter("content.html");
 		new HTMLGenerator(writer).generate(movies);

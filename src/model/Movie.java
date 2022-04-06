@@ -2,7 +2,7 @@ package model;
 
 import interfaces.Content;
 
-public class Movie implements Content {
+public class Movie implements Content, Comparable<Movie>  {
 
 	private String title;
 	private String urlImage;
@@ -46,6 +46,11 @@ public class Movie implements Content {
 	public String year() {
 		// TODO Auto-generated method stub
 		return year;
+	}
+
+	@Override
+	public int compareTo(Movie other) {
+		return rating().compareTo(other.rating());
 	}
 	
 	
